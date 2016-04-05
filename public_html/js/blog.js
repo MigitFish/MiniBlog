@@ -7,7 +7,7 @@ $(function (){
         
         var user = new Backendless.User();
         user.email = "nielsencannon14@yahoo.com",
-        user.passwrod = "password";
-        Backendless.UserService.register(user);
+        user.password = "password";
+        Backendless.UserService.register(user); 
 })
 
