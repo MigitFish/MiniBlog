@@ -5,9 +5,15 @@ $(function (){
         
         Backendless.initApp(APPLICATION_ID, SECRET_KEY, VERSION);
         
-        var user = new Backendless.User();
-        user.email = "nielsencannon14@yahoo.com",
-        user.password = "password";
-        Backendless.UserService.register(user); 
-})
+        var dataStore = Backendless.Persistence.of(Posts);
+        var post  = new Posts({title: "My Fisrt Blog Post", content:"My first blog post content", email:"email@email.com"});
+        dataStore.save(post);
+});
+
+function Posts(args){
+    args = args || {};
+    this.title = args.title || "";
+    this.content = args.content || "";
+    this.authorEmail = args.authorEmail || "";
+}
 
