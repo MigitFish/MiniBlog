@@ -15,7 +15,7 @@ $(function (){
                 
                 var data = $(this).serializeArray(),
                     email = data[0].value,
-                    password = data[1].vaule;
+                    password = data[1].value;
                     
                     Backendless.UserService.login(email, password, true, new Backendless.Async(userLoggedIn, gotError));
             });
@@ -32,8 +32,8 @@ function userLoggedIn (){
     console.log("user successfully logged in");
 }
 
-function gotError() {
+function gotError(error) {
     console.log("Error meaasge -" + error.message);
-    sonsole.log("Error code - " + error.code);
+    console.log("Error code - " + error.code);
 }
 
