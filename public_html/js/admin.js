@@ -51,7 +51,15 @@ $(function (){
                 this.title.value = "";
                 this.content.value = "";
             });
+          
+    $(document).on('click', '.logout', function () {
+        Backendless.UserService.logout(new Backendless.Async(userLoggedOut, gotError));
+        var loginScript = $("#login-template").html();
+            var loginTemplate = Handlebars.compile(loginScript);
             
+            $(".main-container").html(loginTemplate);
+    });
+    
 });
 
 function Posts(args){
@@ -64,7 +72,7 @@ function Posts(args){
 function userLoggedIn (user){
     console.log("user successfully logged in");
     var userData; 
-    if(typeof user == "string"){
+    if(typeof user === "string"){
         userData = Backendless.Data.of(Backendless.User).findById(user);
     } else {
         userData = user;
@@ -74,6 +82,10 @@ function userLoggedIn (user){
     var welcomeHTML = welcomeTemplate(userData);
     
     $('.main-container').html(welcomeHTML);
+}
+
+function userLoggedOut () {
+    console.log("successfully logge out");
 }
 
 function gotError(error) {
