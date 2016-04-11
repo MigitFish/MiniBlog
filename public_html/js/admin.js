@@ -91,5 +91,6 @@ function userLoggedOut () {
 function gotError(error) {
     console.log("Error meaasge -" + error.message);
     console.log("Error code - " + error.code);
+    Materialize.toast("Login Incorrect", 4000, "rounded");
 }
 
