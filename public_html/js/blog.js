@@ -17,11 +17,27 @@ $(function (){
                 return moment(time).format("dddd, MMMM Do YYYY");
             });
             
+            Handlebars.registerHelper('postsToday', function(){
+                var yesterday = (new Date).getTime() - (86400000);
+                var query = {condition: "created >= " + yesterday};
+                var addedPosts = Backendless.Persistence.of(Posts).find(query);
+                console.log(addedPosts);
+                console.log(yesterday);
+                return addedPosts.data.length;
+
+            });
+            
             var blogScript = $("#blogs-template").html();
             var blogTemplate = Handlebars.compile(blogScript);
             var blogHTML = blogTemplate(wrapper);
             
             $(".main-container").html(blogHTML);
+            
+            var blogScriptBadge = $("#today-template").html();
+            var blogTemplateBadge = Handlebars.compile(blogScriptBadge);
+            var blogHTMLBadge = blogTemplateBadge(wrapper);
+            
+            $("#todayo").html(blogHTMLBadge);
 });
 
 function Posts(args){
@@ -31,3 +47,8 @@ function Posts(args){
     this.authorEmail = args.authorEmail || "";
 }
 
+    
+ 
+ 
+
+        
